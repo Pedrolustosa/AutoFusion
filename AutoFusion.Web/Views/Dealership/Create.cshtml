@@ -1,0 +1,131 @@
+@model AutoFusion.Domain.Entities.Dealership
+
+@{
+    ViewData["Title"] = "Nova Concessionária";
+}
+
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary bg-gradient text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-building-add me-2"></i>Nova Concessionária
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" method="post" class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label for="Name" class="form-label">Nome</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-building"></i>
+                                    </span>
+                                    <input asp-for="Name" class="form-control" placeholder="Digite o nome da concessionária" required />
+                                </div>
+                                <span asp-validation-for="Name" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <label for="MaxVehicleCapacity" class="form-label">Capacidade Máxima de Veículos</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-car-front"></i>
+                                    </span>
+                                    <input asp-for="MaxVehicleCapacity" type="number" class="form-control" placeholder="Quantidade máxima de veículos" required />
+                                </div>
+                                <span asp-validation-for="MaxVehicleCapacity" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 mb-4">
+                                <label for="Address" class="form-label">Endereço</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-geo-alt"></i>
+                                    </span>
+                                    <input asp-for="Address" class="form-control" placeholder="Digite o endereço" required />
+                                </div>
+                                <span asp-validation-for="Address" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label for="City" class="form-label">Cidade</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-buildings"></i>
+                                    </span>
+                                    <input asp-for="City" class="form-control" placeholder="Digite a cidade" required />
+                                </div>
+                                <span asp-validation-for="City" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-3 mb-4">
+                                <label for="State" class="form-label">Estado</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-map"></i>
+                                    </span>
+                                    <input asp-for="State" class="form-control" placeholder="UF" required maxlength="2" />
+                                </div>
+                                <span asp-validation-for="State" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-3 mb-4">
+                                <label for="PostalCode" class="form-label">CEP</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-mailbox"></i>
+                                    </span>
+                                    <input asp-for="PostalCode" class="form-control" placeholder="00000-000" required />
+                                </div>
+                                <span asp-validation-for="PostalCode" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label for="Phone" class="form-label">Telefone</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-telephone"></i>
+                                    </span>
+                                    <input asp-for="Phone" class="form-control" placeholder="(00) 0000-0000" required />
+                                </div>
+                                <span asp-validation-for="Phone" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <label for="Email" class="form-label">E-mail</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-envelope"></i>
+                                    </span>
+                                    <input asp-for="Email" type="email" class="form-control" placeholder="email@exemplo.com" required />
+                                </div>
+                                <span asp-validation-for="Email" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left me-1"></i>Voltar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle me-1"></i>Salvar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

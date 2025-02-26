@@ -1,0 +1,59 @@
+@using AutoFusion.Domain.Extensions
+@model IEnumerable<AutoFusion.Domain.Entities.Vehicle>
+
+@{
+    ViewData["Title"] = "Veículos";
+}
+
+<div class="container-fluid py-4">
+    <div class="card">
+        <div class="card-header bg-primary bg-gradient text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="bi bi-car-front me-2"></i>Veículos
+                </h5>
+                <a asp-action="Create" class="btn btn-light">
+                    <i class="bi bi-plus-circle me-2"></i>Novo Veículo
+                </a>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th>Modelo</th>
+                            <th>Fabricante</th>
+                            <th>Ano</th>
+                            <th>Tipo</th>
+                            <th>Preço</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Model</td>
+                                <td>@item.Manufacturer?.Name</td>
+                                <td>@item.ManufacturingYear</td>
+                                <td>
+                                    <span class="badge bg-primary">@item.VehicleType.GetDisplayName()</span>
+                                </td>
+                                <td>@item.Price.ToString("C")</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.VehicleId" class="btn btn-primary btn-sm">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.VehicleId" class="btn btn-danger btn-sm">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

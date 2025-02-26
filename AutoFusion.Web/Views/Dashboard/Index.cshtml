@@ -1,0 +1,265 @@
+@model AutoFusion.Web.Models.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container-fluid py-4">
+    <!-- Bem-vindo -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card bg-primary bg-gradient text-white shadow-sm">
+                <div class="card-body py-4">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h4 class="mb-1">Bem-vindo, @User.Identity?.Name!</h4>
+                            <p class="mb-0 opacity-75">
+                                <i class="bi bi-calendar3 me-2"></i>@DateTime.Now.ToString("dddd, dd 'de' MMMM 'de' yyyy")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botões de Criação -->
+    <div class="row g-4 mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="mb-3"><i class="bi bi-plus-circle me-2"></i>Criar Novo Registro</h5>
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <a asp-controller="Dealership" asp-action="Create" class="btn btn-primary w-100">
+                                <i class="bi bi-building me-2"></i>Nova Concessionária
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a asp-controller="Vehicle" asp-action="Create" class="btn btn-primary w-100">
+                                <i class="bi bi-car-front me-2"></i>Novo Veículo
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a asp-controller="Sale" asp-action="Create" class="btn btn-primary w-100">
+                                <i class="bi bi-cash-stack me-2"></i>Nova Venda
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a asp-controller="Manufacturer" asp-action="Create" class="btn btn-primary w-100">
+                                <i class="bi bi-tools me-2"></i>Novo Fabricante
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estatísticas -->
+    <div class="row g-4 mb-4">
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="stats-icon bg-primary bg-gradient text-white p-3 rounded">
+                                <i class="bi bi-car-front-fill fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="card-subtitle text-muted mb-1">Total de Veículos</h6>
+                            <h3 class="card-title mb-0">@Model.TotalVehicles</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="stats-icon bg-success bg-gradient text-white p-3 rounded">
+                                <i class="bi bi-cash-stack fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="card-subtitle text-muted mb-1">Total de Vendas</h6>
+                            <h3 class="card-title mb-0">@Model.TotalSalesAmount.ToString("C")</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="stats-icon bg-info bg-gradient text-white p-3 rounded">
+                                <i class="bi bi-building fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="card-subtitle text-muted mb-1">Concessionárias</h6>
+                            <h3 class="card-title mb-0">@Model.TotalDealerships</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="stats-icon bg-warning bg-gradient text-white p-3 rounded">
+                                <i class="bi bi-people fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="card-subtitle text-muted mb-1">Clientes</h6>
+                            <h3 class="card-title mb-0">@Model.TotalCustomers</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráfico e Lista de Vendas por Concessionária -->
+    <div class="row g-4">
+        <div class="col-12 col-xl-6">
+            <div class="card h-100">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Vendas por Concessionária</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="salesChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-xl-6">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Lista de Vendas por Concessionária</h5>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        @foreach (var dealership in Model.SalesByDealership)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>@dealership.Dealership</span>
+                                <span class="badge bg-primary rounded-pill">@dealership.TotalSales</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista de Vendas Recentes e Fabricantes -->
+    <div class="row g-4">
+        <div class="col-12 col-xl-8">
+            <div class="card h-100">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Vendas Recentes</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Veículo</th>
+                                    <th>Cliente</th>
+                                    <th>Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var sale in Model.RecentSales)
+                                {
+                                    <tr>
+                                        <td>@sale.SaleDate.ToString("dd/MM/yyyy")</td>
+                                        <td>@(sale.Vehicle?.Model ?? "N/A")</td>
+                                        <td>@(sale.Customer?.Name ?? "N/A")</td>
+                                        <td>@sale.SalePrice.ToString("C")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-xl-4">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Fabricantes</h5>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        @foreach (var manufacturer in Model.Manufacturers)
+                        {
+                            <li class="list-group-item">
+                                <h6 class="mb-1">@manufacturer.Name</h6>
+                                <small class="text-muted">@manufacturer.CountryOfOrigin</small>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- CDN do Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var ctx = document.getElementById('salesChart').getContext('2d');
+            var salesChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: @Html.Raw(Json.Serialize(Model.SalesByDealership.Select(d => d.Dealership))),
+                    datasets: [{
+                        label: 'Vendas por Concessionária',
+                        data: @Html.Raw(Json.Serialize(Model.SalesByDealership.Select(d => d.TotalSales))),
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}
+
+@section Styles {
+    <style>
+        .stats-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border-radius: 50%;
+        }
+    </style>
+}

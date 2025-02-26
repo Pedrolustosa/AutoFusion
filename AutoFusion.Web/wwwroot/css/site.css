@@ -1,0 +1,92 @@
+/* Melhorando a legibilidade do texto */
+html {
+    font-size: 14px;
+    scroll-behavior: smooth;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* Suavizando o foco em botões e campos de entrada */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(37, 140, 251, 0.6);
+    outline: none;
+}
+
+/* Mantendo o layout estruturado */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Navbar melhorada */
+.navbar-custom {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+    .navbar-custom .navbar-brand {
+        color: #ffffff !important;
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+
+    .navbar-custom .nav-link {
+        color: #ffffff !important;
+        font-weight: 500;
+        transition: color 0.3s ease-in-out;
+    }
+
+        .navbar-custom .nav-link:hover {
+            color: #ffd700 !important;
+        }
+
+/* Botões personalizados */
+.btn-primary {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    border: none;
+    transition: background 0.3s ease-in-out;
+}
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #2a5298, #1e3c72);
+    }
+
+.btn-outline-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+/* Rodapé fixo e estilizado */
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(135deg, #2a5298, #1e3c72);
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 0.9rem;
+}
+
+    .footer a {
+        color: #ffd700;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }

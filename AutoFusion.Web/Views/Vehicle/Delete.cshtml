@@ -1,0 +1,57 @@
+@model AutoFusion.Domain.Entities.Vehicle
+
+@{
+    ViewData["Title"] = "Excluir Veículo";
+}
+
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+            <div class="card">
+                <div class="card-header bg-danger bg-gradient text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-trash me-2"></i>Excluir Veículo
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        <strong>Atenção!</strong> Tem certeza que deseja excluir este veículo?
+                    </div>
+
+                    <dl class="row">
+                        <dt class="col-sm-3">Modelo</dt>
+                        <dd class="col-sm-9">@Model.Model</dd>
+
+                        <dt class="col-sm-3">Fabricante</dt>
+                        <dd class="col-sm-9">@Model.Manufacturer?.Name</dd>
+
+                        <dt class="col-sm-3">Ano</dt>
+                        <dd class="col-sm-9">@Model.ManufacturingYear</dd>
+
+                        <dt class="col-sm-3">Tipo</dt>
+                        <dd class="col-sm-9">@Model.VehicleType</dd>
+
+                        <dt class="col-sm-3">Preço</dt>
+                        <dd class="col-sm-9">@Model.Price.ToString("C")</dd>
+
+                        <dt class="col-sm-3">Descrição</dt>
+                        <dd class="col-sm-9">@Model.Description</dd>
+                    </dl>
+
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" asp-for="VehicleId" />
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Index" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-2"></i>Voltar
+                            </a>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="bi bi-trash me-2"></i>Confirmar Exclusão
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

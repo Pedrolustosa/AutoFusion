@@ -1,0 +1,79 @@
+@model ErrorViewModel
+@{
+    ViewData["Title"] = "Erro";
+}
+
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="card shadow-sm border-danger">
+                <div class="card-header bg-danger bg-gradient text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>Ocorreu um Erro
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.ShowRequestId)
+                    {
+                        <div class="alert alert-info d-flex align-items-center mb-4" role="alert">
+                            <i class="bi bi-info-circle-fill me-2"></i>
+                            <div>
+                                <strong>ID da Requisição:</strong> <code>@Model.RequestId</code>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="text-center mb-4">
+                        <i class="bi bi-emoji-frown display-1 text-danger mb-3"></i>
+                        <h2 class="mb-3">Desculpe, algo deu errado!</h2>
+                        <p class="lead text-muted">
+                            Estamos trabalhando para resolver o problema o mais rápido possível.
+                        </p>
+                    </div>
+
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="card h-100 bg-light border-0">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="bi bi-question-circle text-primary me-2"></i>O que fazer?
+                                    </h5>
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="mb-2">
+                                            <i class="bi bi-arrow-return-right text-primary me-2"></i>Tente recarregar a página
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="bi bi-arrow-return-right text-primary me-2"></i>Verifique sua conexão com a internet
+                                        </li>
+                                        <li>
+                                            <i class="bi bi-arrow-return-right text-primary me-2"></i>Tente novamente mais tarde
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 bg-light border-0">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="bi bi-headset text-primary me-2"></i>Precisa de Ajuda?
+                                    </h5>
+                                    <p class="card-text">Se o problema persistir, entre em contato com nossa equipe de suporte:</p>
+                                    <a href="mailto:suporte@autofusion.com" class="btn btn-outline-primary">
+                                        <i class="bi bi-envelope me-2"></i>Contatar Suporte
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-primary">
+                            <i class="bi bi-house me-2"></i>Voltar para Página Inicial
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

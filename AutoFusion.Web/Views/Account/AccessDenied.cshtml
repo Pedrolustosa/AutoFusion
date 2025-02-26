@@ -1,0 +1,78 @@
+@{
+    ViewData["Title"] = "Acesso Negado";
+}
+
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="card shadow-sm border-danger">
+                <div class="card-header bg-danger bg-gradient text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-shield-lock-fill me-2"></i>Acesso Negado
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <i class="bi bi-x-octagon display-1 text-danger mb-3"></i>
+                        <h2 class="mb-3">Desculpe, você não tem permissão!</h2>
+                        <p class="lead text-muted">
+                            Você não possui as permissões necessárias para acessar esta página.
+                        </p>
+                    </div>
+
+                    <div class="alert alert-warning d-flex align-items-center mb-4" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        <div>
+                            Se você acredita que deveria ter acesso a esta página, entre em contato com o administrador do sistema.
+                        </div>
+                    </div>
+
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="card h-100 bg-light border-0">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="bi bi-question-circle text-primary me-2"></i>O que fazer?
+                                    </h5>
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="mb-2">
+                                            <i class="bi bi-arrow-return-right text-primary me-2"></i>Verifique suas credenciais
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="bi bi-arrow-return-right text-primary me-2"></i>Faça login novamente
+                                        </li>
+                                        <li>
+                                            <i class="bi bi-arrow-return-right text-primary me-2"></i>Contate o suporte
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 bg-light border-0">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="bi bi-headset text-primary me-2"></i>Precisa de Ajuda?
+                                    </h5>
+                                    <p class="card-text">Entre em contato com nossa equipe de suporte:</p>
+                                    <a href="mailto:suporte@autofusion.com" class="btn btn-outline-primary">
+                                        <i class="bi bi-envelope me-2"></i>Contatar Suporte
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-primary me-2">
+                            <i class="bi bi-house me-2"></i>Voltar para Início
+                        </a>
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-outline-primary">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Fazer Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

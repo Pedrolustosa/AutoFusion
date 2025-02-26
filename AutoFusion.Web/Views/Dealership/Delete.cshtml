@@ -1,0 +1,79 @@
+@model AutoFusion.Domain.Entities.Dealership
+
+@{
+    ViewData["Title"] = "Excluir Concessionária";
+}
+
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger bg-gradient text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-exclamation-triangle me-2"></i>Confirmar Exclusão
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-circle me-2"></i>
+                        Tem certeza que deseja excluir esta concessionária? Esta ação não pode ser desfeita.
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <h6 class="text-muted mb-3">Informações Básicas</h6>
+                            <dl class="row">
+                                <dt class="col-sm-4">Nome</dt>
+                                <dd class="col-sm-8">@Model.Name</dd>
+
+                                <dt class="col-sm-4">Capacidade</dt>
+                                <dd class="col-sm-8">@Model.MaxVehicleCapacity veículos</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <h6 class="text-muted mb-3">Contato</h6>
+                            <dl class="row">
+                                <dt class="col-sm-4">Telefone</dt>
+                                <dd class="col-sm-8">@Model.Phone</dd>
+
+                                <dt class="col-sm-4">E-mail</dt>
+                                <dd class="col-sm-8">@Model.Email</dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <h6 class="text-muted mb-3">Endereço</h6>
+                            <dl class="row">
+                                <dt class="col-sm-2">Logradouro</dt>
+                                <dd class="col-sm-10">@Model.Address</dd>
+
+                                <dt class="col-sm-2">Cidade</dt>
+                                <dd class="col-sm-10">@Model.City</dd>
+
+                                <dt class="col-sm-2">Estado</dt>
+                                <dd class="col-sm-10">@Model.State</dd>
+
+                                <dt class="col-sm-2">CEP</dt>
+                                <dd class="col-sm-10">@Model.PostalCode</dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <form asp-action="Delete" method="post" class="mt-4">
+                        <input type="hidden" asp-for="DealershipId" />
+                        <div class="d-flex justify-content-end gap-2">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left me-1"></i>Voltar
+                            </a>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="bi bi-trash me-1"></i>Excluir
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
