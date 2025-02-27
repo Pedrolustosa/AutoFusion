@@ -1,0 +1,97 @@
+﻿@{
+    ViewData["Title"] = "Gerar Relatório";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4><i class="bi bi-file-earmark-text"></i> Gerar Relatório</h4>
+                </div>
+                <div class="card-body">
+                    <form id="reportForm">
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Selecione o Tipo de Relatório:</strong></label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reportType" value="vehicle" id="vehicleReport">
+                                <label class="form-check-label" for="vehicleReport">
+                                    <i class="bi bi-car-front"></i> Veículos
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reportType" value="sale" id="saleReport">
+                                <label class="form-check-label" for="saleReport">
+                                    <i class="bi bi-cart-check"></i> Vendas
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reportType" value="dealership" id="dealershipReport">
+                                <label class="form-check-label" for="dealershipReport">
+                                    <i class="bi bi-shop"></i> Concessionárias
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reportType" value="manufacturer" id="manufacturerReport">
+                                <label class="form-check-label" for="manufacturerReport">
+                                    <i class="bi bi-building"></i> Fabricantes
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-download"></i> Gerar Relatório
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("reportForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        let selectedReportType = document.querySelector('input[name="reportType"]:checked');
+        let button = document.querySelector('button[type="submit"]');
+
+        if (!selectedReportType) {
+            alert("⚠️ Por favor, selecione um tipo de relatório.");
+            return;
+        }
+
+        button.innerHTML = '<i class="bi bi-arrow-repeat"></i> Gerando...';
+        button.disabled = true;
+
+        fetch('/Reporting/DownloadReportPdf', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({ reportType: selectedReportType.value })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Erro ao gerar o relatório.");
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                let a = document.createElement('a');
+                a.href = window.URL.createObjectURL(blob);
+                a.download = `relatorio_${selectedReportType.value}_${new Date().toISOString().slice(0, 10)}.pdf`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                button.innerHTML = '<i class="bi bi-download"></i> Gerar Relatório';
+                button.disabled = false;
+            })
+            .catch(error => {
+                console.error("Erro ao gerar relatório:", error);
+                alert("❌ Falha ao gerar relatório. Tente novamente.");
+                button.innerHTML = '<i class="bi bi-download"></i> Gerar Relatório';
+                button.disabled = false;
+            });
+    });
+</script>
